@@ -1,0 +1,12 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(data_scientist, "Cientista de Dados")
+System_Boundary(fs, "Feature Store") {
+  Container(creator, "Criador de Feature", "Python", "Gera feature a partir de dados brutos")
+  ContainerDb(store, "Feature Store", "Feast", "Armazena, versiona e serve features")
+  Container(model, "Treinamento", "ML Framework", "Consome features para treinar")
+}
+Rel(data_scientist, creator, "Desenvolve")
+Rel(creator, store, "Registra")
+Rel(model, store, "Consulta")
+@enduml

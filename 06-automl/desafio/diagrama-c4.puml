@@ -1,0 +1,12 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(user, "Usuário de Negócio")
+System_Boundary(automl, "Plataforma AutoML") {
+  Container(ui, "Interface AutoML", "Web UI", "Interface visual para configuração")
+  Container(service, "AutoML Service", "Vertex AI", "Executa pipeline automatizado")
+  Container(model, "Modelo Gerado", "AutoML", "Modelo treinado automaticamente")
+}
+Rel(user, ui, "Configura dataset e objetivo")
+Rel(ui, service, "Dispara execução")
+Rel(service, model, "Gera")
+@enduml

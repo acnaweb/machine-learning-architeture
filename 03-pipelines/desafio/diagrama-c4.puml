@@ -1,0 +1,14 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(dev, "Engenheiro de ML")
+System_Boundary(pipeline, "Pipeline Orquestrado") {
+  Container(airflow, "Airflow", "Apache", "Orquestrador de pipeline")
+  Container(task1, "Ingestão", "Python", "Tarefa de coleta")
+  Container(task2, "Treinamento", "Sklearn", "Tarefa de modelagem")
+  Container(task3, "Avaliação", "Python", "Tarefa de validação")
+}
+Rel(dev, airflow, "Configura DAGs")
+Rel(airflow, task1, "Executa")
+Rel(airflow, task2, "Executa")
+Rel(airflow, task3, "Executa")
+@enduml

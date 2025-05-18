@@ -1,0 +1,12 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(researcher, "Cientista de Dados")
+System_Boundary(registry, "Tracking + Registry") {
+  Container(code, "Experimentos", "Jupyter/Python", "Gera runs de experimento")
+  Container(tracker, "MLflow Tracking", "MLflow", "Armazena métricas")
+  Container(store, "Model Registry", "MLflow", "Versões de modelo")
+}
+Rel(researcher, code, "Executa")
+Rel(code, tracker, "Registra métrica")
+Rel(code, store, "Salva modelo")
+@enduml

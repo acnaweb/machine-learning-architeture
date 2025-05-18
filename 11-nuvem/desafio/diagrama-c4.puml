@@ -1,0 +1,13 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(dev, "Cientista de Dados")
+System_Boundary(nuvem, "Plataforma Gerenciada") {
+  Container(dataset, "Dataset", "BigQuery", "Base de dados na nuvem")
+  Container(train, "Treinamento", "Vertex AI", "Job de treinamento")
+  Container(registry, "Model Registry", "Vertex AI", "Controle de versão")
+  Container(endpoint, "Serving", "Vertex AI Endpoint", "Serviço de inferência")
+}
+Rel(dev, train, "Inicia treino")
+Rel(train, registry, "Registra modelo")
+Rel(endpoint, registry, "Lê versão")
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(app, "Aplicativo")
+System_Boundary(serving, "Online + Offline Serving") {
+  Container(batch, "Batch Job", "Spark", "Inferência em lote")
+  Container(api, "REST API", "FastAPI", "Inferência online")
+  ContainerDb(model, "Modelo Servido", "Pickle/TensorFlow", "Mesmo artefato")
+}
+Rel(app, api, "Chama")
+Rel(batch, model, "Lê")
+Rel(api, model, "Lê")
+@enduml

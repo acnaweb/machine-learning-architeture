@@ -1,0 +1,12 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(api_client, "Cliente da API")
+System_Boundary(multi, "Sistema Multi-Modelo") {
+  Container(router, "Orquestrador", "FastAPI", "Define qual modelo usar")
+  Container(model_a, "Modelo A", "Sklearn", "Serve segmento A")
+  Container(model_b, "Modelo B", "XGBoost", "Serve segmento B")
+}
+Rel(api_client, router, "Faz chamada")
+Rel(router, model_a, "Roteia")
+Rel(router, model_b, "Roteia")
+@enduml

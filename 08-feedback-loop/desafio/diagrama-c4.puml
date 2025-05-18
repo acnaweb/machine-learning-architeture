@@ -1,0 +1,13 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(observer, "Sistema de Observabilidade")
+System_Boundary(feedback, "Feedback Loop") {
+  Container(serving, "Serviço de Inferência", "REST API", "Serviço ativo")
+  Container(monitor, "Monitoramento", "Prometheus", "Coleta métricas")
+  Container(trigger, "Trigger", "Cloud Function", "Aciona reentrenamento")
+  Container(pipeline, "Treinamento", "Airflow", "Pipeline automatizado")
+}
+Rel(serving, monitor, "Expõe métricas")
+Rel(monitor, trigger, "Detecta degradação")
+Rel(trigger, pipeline, "Aciona novo treino")
+@enduml

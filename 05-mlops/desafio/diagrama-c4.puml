@@ -1,0 +1,14 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(devops, "Engenheiro de ML")
+System_Boundary(ci_cd, "Arquitetura MLOps") {
+  Container(git, "GitHub", "Git", "Repositório de código")
+  Container(action, "CI/CD Pipeline", "GitHub Actions", "Executa testes e deploy")
+  Container(registry, "Model Registry", "MLflow", "Armazena versões de modelos")
+  Container(serving, "Serviço de Inferência", "FastAPI", "Exposição do modelo")
+}
+Rel(devops, git, "Faz push")
+Rel(git, action, "Gatilho CI/CD")
+Rel(action, registry, "Registra modelo")
+Rel(action, serving, "Faz deploy")
+@enduml

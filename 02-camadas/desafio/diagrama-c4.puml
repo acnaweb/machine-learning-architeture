@@ -1,0 +1,14 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(dev, "Engenheiro de ML")
+System_Boundary(camadas, "Pipeline em Camadas") {
+  Container(ingest, "Ingestão", "Python", "Coleta dados de APIs")
+  Container(process, "Pré-processamento", "Kedro", "Limpa e transforma dados")
+  Container(model, "Modelagem", "Scikit-learn", "Treina o modelo")
+  ContainerDb(output, "Dataset Pronto", "Parquet", "Saída intermediária")
+}
+Rel(dev, ingest, "Orquestra")
+Rel(ingest, process, "Passa dados")
+Rel(process, model, "Envia features")
+Rel(model, output, "Salva resultados")
+@enduml

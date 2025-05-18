@@ -1,0 +1,10 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(dev, "Cientista de Dados")
+System_Boundary(monolith, "Pipeline Monolítico") {
+  Container(jupyter, "Notebook", "Jupyter + Scikit-learn", "Script que executa todas as etapas do ML")
+  ContainerDb(storage, "Arquivo CSV", "Local", "Fonte de dados")
+}
+Rel(dev, jupyter, "Executa")
+Rel(jupyter, storage, "Lê dados")
+@enduml
